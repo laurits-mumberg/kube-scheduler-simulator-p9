@@ -11,10 +11,13 @@ import (
 	"k8s.io/klog"
 
 	"sigs.k8s.io/kube-scheduler-simulator/simulator/pkg/debuggablescheduler"
+	"sigs.k8s.io/kube-scheduler-simulator/simulator/pkg/nodenumber"
 )
 
 func main() {
-	command, cancelFn, err := debuggablescheduler.NewSchedulerCommand()
+	command, cancelFn, err := debuggablescheduler.NewSchedulerCommand(
+		debuggablescheduler.WithPlugin(nodenumber.Name, nodenumber.New),
+	)
 	if err != nil {
 		klog.Info(fmt.Sprintf("failed to build the debuggablescheduler command: %+v", err))
 		os.Exit(1)

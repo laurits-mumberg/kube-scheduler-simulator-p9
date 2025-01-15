@@ -63,6 +63,7 @@ services:
       - KWOK_KUBE_APISERVER_PORT=3131
     networks:
       - simulator-internal-network
+    command: --enable-crds Stage
 networks:
   simulator-internal-network:
     driver: bridge
